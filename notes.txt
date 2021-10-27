@@ -1,0 +1,7 @@
+MONGO IMPORTS:  --------------------------------
+mongoimport -d isdbDb -c albums --type csv --file albums.csv --headerline
+mongoimport -d isdbDb -c artists --type csv --file artists.csv --headerline
+mongoimport -d isdbDb -c genres --type csv --file genres.csv --headerline
+mongoimport -d isdbDb -c media_types --type csv --file media_types.csv --headerline
+mongoimport -d isdbDb -c tracks --type csv --file tracks.csv --headerline
+

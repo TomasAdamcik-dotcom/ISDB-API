@@ -1,41 +1,65 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const jwt = require('jsonwebtoken'); // to use jwt for signing in
+const mongoose = require('mongoose') // to use mongodb
+// libraries for authentication
+const passport = require("passport");
+const passportJWT = require("passport-jwt");
+const passportLocalMongoose = require("passport-local-mongoose");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app = express();
 
-var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+mongoose.connect("mongodb://localhost:27017/isdbDb")
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// define strategy
+  // !!! use passportLocalMongoose to hash password and add salt
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// REGISTER --------------------------------------
+app.post('/register',(req,res)=>{
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// check if user already exists
+  // if exists give error message
+  //  if does not exists, save username and password
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+  res.send("Register page")
+})
+
+
+// LOGIN -----------------------------------------
+app.post('/login',(req,res)=>{
+
+  // check if username exists
+    // if not, give error message
+    // if yes, check username and password is matching
+      // log in & release jwt token
+    
+  res.send("Login page")
+})
+
+app.use(express.json())
+app.use('/api', routes)
+
+// TRACKS/:ID ------------------------------------
+  // get all info about specific track: 
+    // include genre and album info
+
+    app.get('/tracks/:id',(req,res)=>{
+
+      // 
+        
+      res.send("Login page")
+    })
+
+// GENRES ----------------------------------------
+// ALBUMS/:ID ------------------------------------
+// TRACKS ----------------------------------------
+// ARTISTS/:ID -----------------------------------
+
+
+
+app.get('*',(req,res)=>{
+  res.send("This directory does not exist.")
+})
 
 module.exports = app;

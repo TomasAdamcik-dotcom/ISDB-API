@@ -5,3 +5,18 @@ mongoimport -d isdbDb -c genres --type csv --file genres.csv --headerline
 mongoimport -d isdbDb -c media_types --type csv --file media_types.csv --headerline
 mongoimport -d isdbDb -c tracks --type csv --file tracks.csv --headerline
 
+Dependencies -----------------------
+npm init -y
+npm install --save express
+nmp install --save-dev nodemon
+npm install --save jsonwebtoken
+npm install --save passport
+npm install --save passport-jwt
+npm install --save mongoose
+npm install --save passport-local-mongoose
+
+API building process ---------------
+1. set up model
+2. export model to route
+3. buld route
+4. test in Postman

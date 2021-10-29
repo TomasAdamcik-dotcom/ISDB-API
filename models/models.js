@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose'), Schema = mongoose.Schema
 
 // SCHEMAS -------------------------------------------
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -16,22 +16,22 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
-const TrackSchema = new mongoose.Schema({
+const TrackSchema = new Schema({
     _id: {
         $oid: String
     },
     TrackId: Number,
     Name: String,
-    AlbumId: Number,
-    MediaTypeId: Number,
-    GenreId: Number,
+    AlbumId: {type: Schema.Types.ObjectId, ref: "Album"},
+    MediaTypeId: {type: Schema.Types.ObjectId, ref: "MediaType"},
+    GenreId: {type: Schema.Types.ObjectId, ref: "Genre"},
     Composer: String,
     Milliseconds: Number,
     Bytes: Number,
     UnitPrice: Number
 })
 
-const MediaTypeSchema = new mongoose.Schema({
+const MediaTypeSchema = new Schema({
     _id: {
         $oid: String
     },
@@ -39,7 +39,7 @@ const MediaTypeSchema = new mongoose.Schema({
     Name: String
 })
 
-const GenreSchema = new mongoose.Schema({
+const GenreSchema = new Schema({
     _id: {
         $oid: String
     },
@@ -47,7 +47,7 @@ const GenreSchema = new mongoose.Schema({
     Name: String
 })
 
-const ArtistSchema = new mongoose.Schema({
+const ArtistSchema = new Schema({
     _id: {
         $oid: String
     },
@@ -55,13 +55,13 @@ const ArtistSchema = new mongoose.Schema({
     Name: String
 })
 
-const AlbumSchema = new mongoose.Schema({
+const AlbumSchema = new Schema({
     _id: {
         $oid: String
     },
     AlbumId: Number,
     Title: String,
-    ArtistId: Number
+    ArtistId: {type: Schema.Types.ObjectId, ref: "Album"}
 })
 
 // MODELS -------------------------------------------

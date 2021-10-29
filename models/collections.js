@@ -1,20 +1,7 @@
 const mongoose = require('mongoose'), Schema = mongoose.Schema
 
 // SCHEMAS -------------------------------------------
-const UserSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 20
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 20
-    }
-})
+
 
 const TrackSchema = new Schema({
     _id: {
@@ -65,7 +52,7 @@ const AlbumSchema = new Schema({
 })
 
 // MODELS -------------------------------------------
-const User = mongoose.model('User', UserSchema)
+
 const Track = mongoose.model('Track', TrackSchema)
 const MediaType = mongoose.model('MediaType', MediaTypeSchema)
 const Genre = mongoose.model('Genre', GenreSchema)
@@ -75,4 +62,4 @@ const Album = mongoose.model('Album', AlbumSchema)
 
 
 // EXPORTS -------------------------------------------
-module.exports = { User, Track, MediaType, Genre, Artist, Album }
+module.exports = { Track, MediaType, Genre, Artist, Album }

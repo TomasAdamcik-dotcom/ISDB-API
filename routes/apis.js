@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport')
-const { User, Track, MediaType, Genre, Artist, Album } = require('../models/models')
+// const { User, Track, MediaType, Genre, Artist, Album } = require('../models/collections')
 
 
 
@@ -33,7 +33,7 @@ const { User, Track, MediaType, Genre, Artist, Album } = require('../models/mode
 // GENRES ----THIS IS A TEST - NEED TO BE CORRECTED------------------------------------
 router.get(
   '/genres',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   async function (req, res) {
      Genre.find({}, await function (err, genres) {
       if (err) {

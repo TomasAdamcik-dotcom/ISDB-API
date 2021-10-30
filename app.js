@@ -28,9 +28,9 @@ app.use(passport.initialize());
 app.use(express.urlencoded({ extended: true }));
 
 // this is to use bin/www 
-// module.exports = app;
+module.exports = app;
 
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000")
-})
+// app.listen(3000, () => {
+//   console.log("Listening on port 3000")
+// })

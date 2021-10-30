@@ -1,6 +1,6 @@
-const passportJWT = require("passport-jwt");
 const passport = require("passport");
-const {User} = require('../models/users');
+const passportJWT = require("passport-jwt");
+const { User } = require('../models/users');
 
 
 // authentication and tokens

@@ -1,8 +1,15 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport')
-// const { User, Track, MediaType, Genre, Artist, Album } = require('../models/collections')
+const { Track, MediaType, Genre, Artist, Album } = require('../models/collections')
 
+
+router.get(
+  '/secret',
+  passport.authenticate('jwt', { session: false }),
+   function (req, res) {
+    res.send({message: "you are in secret zone"})
+  })
 
 
 // TRACKS/:ID ------------------------------------
@@ -32,10 +39,10 @@ const passport = require('passport')
 
 // GENRES ----THIS IS A TEST - NEED TO BE CORRECTED------------------------------------
 router.get(
-  '/genres',
-  passport.authenticate('jwt', { session: false }),
-  async function (req, res) {
-     Genre.find({}, await function (err, genres) {
+  '/genres/:id',
+  //  passport.authenticate('jwt', { session: false }),
+   function (req, res) {
+     Genre.find({GenreId: req.params.id}, function (err, genres) {
       if (err) {
         res.status(401).json(err)
       } else {
@@ -66,11 +73,5 @@ router.get(
 
 
 
-
-
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
 
 module.exports = router;

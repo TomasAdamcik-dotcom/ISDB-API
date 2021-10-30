@@ -19,12 +19,13 @@ const atlasKey = process.env.MONGO_ATLAS_PWD
 // mongoose.connect("mongodb://localhost:27017/isdbDb")
 mongoose.connect(`mongodb+srv://TomasAdam:${atlasKey}@cluster0.qo7k8.mongodb.net/isdbDb?retryWrites=true&w=majority`)
 app.use(express.json())
+app.use(passport.initialize());
 
 // utilisation of routes
 app.use('/api', authRoute)
 app.use('/api', apiRoutes)
 
-app.use(passport.initialize());
+
 app.use(express.urlencoded({ extended: true }));
 
 // this is to use bin/www 

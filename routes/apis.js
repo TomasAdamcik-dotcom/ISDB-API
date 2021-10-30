@@ -4,12 +4,12 @@ const passport = require('passport')
 const { Track, MediaType, Genre, Artist, Album } = require('../models/collections')
 
 
-router.get(
-  '/secret',
-  passport.authenticate('jwt', { session: false }),
-   function (req, res) {
-    res.send({message: "you are in secret zone"})
-  })
+// router.get(
+//   '/secret',
+//   passport.authenticate('jwt', { session: false }),
+//    function (req, res) {
+//     res.send({message: "you are in secret zone"})
+//   })
 
 
 // TRACKS/:ID ------------------------------------
@@ -40,7 +40,7 @@ router.get(
 // GENRES ----THIS IS A TEST - NEED TO BE CORRECTED------------------------------------
 router.get(
   '/genres/:id',
-  //  passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
    function (req, res) {
      Genre.find({GenreId: req.params.id}, function (err, genres) {
       if (err) {

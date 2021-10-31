@@ -22,3 +22,11 @@ API building process ---------------
 3. buld route
 4. test in Postman
 
+  Track.aggregate([
+       {$lookup {from: "Albums", as: "Artist", let: "someting" , pipeline: "" }
+       },
+       {$match: {ArtistId: 2}},
+       {$project: {_id: 0, name: 1}}
+       {$sort: _id: 1}
+       {$group: }
+     ])

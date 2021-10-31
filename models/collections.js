@@ -4,14 +4,16 @@ const mongoose = require('mongoose'), Schema = mongoose.Schema
 
 
 const TrackSchema = new Schema({
-    _id: {
-        $oid: String
-    },
+    // _id: {
+    //     $oid: String
+    // },
     TrackId: Number,
     Name: String,
-    AlbumId: {type: Schema.Types.ObjectId, ref: "Album"},
+    // AlbumId: {type: Schema.Types.ObjectId, ref: "Album"}, // genreid and albumid does not send if defined this way
+    AlbumId: Number,
     MediaTypeId: {type: Schema.Types.ObjectId, ref: "MediaType"},
-    GenreId: {type: Schema.Types.ObjectId, ref: "Genre"},
+    // GenreId: {type: Schema.Types.ObjectId, ref: "Genre"}, // genreid and albumid does not send if defined this way
+    GenreId: Number,
     Composer: String,
     Milliseconds: Number,
     Bytes: Number,
@@ -19,33 +21,33 @@ const TrackSchema = new Schema({
 })
 
 const MediaTypeSchema = new Schema({
-    _id: {
-        $oid: String
-    },
+    // _id: {
+    //     $oid: String
+    // },
     MediaTypeId: Number,
     Name: String
 })
 
 const GenreSchema = new Schema({
-    _id: {
-        $oid: String
-    },
+    // _id: {
+    //     $oid: String
+    // },
     GenreId: Number,
     Name: String
 })
 
 const ArtistSchema = new Schema({
-    _id: {
-        $oid: String
-    },
+    // _id: {
+    //     $oid: String
+    // },
     ArtistId: Number,
     Name: String
 })
 
 const AlbumSchema = new Schema({
-    _id: {
-        $oid: String
-    },
+    // _id: {
+    //     $oid: String
+    // },
     AlbumId: Number,
     Title: String,
     ArtistId: {type: Schema.Types.ObjectId, ref: "Album"}

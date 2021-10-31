@@ -16,8 +16,8 @@ const apiRoutes = require('./routes/apis');
 // logic
 const app = express();
 const atlasKey = process.env.MONGO_ATLAS_PWD
-mongoose.connect("mongodb://localhost:27017/isdbDb")
-// mongoose.connect(`mongodb+srv://TomasAdam:${atlasKey}@cluster0.qo7k8.mongodb.net/isdbDb?retryWrites=true&w=majority`)
+// mongoose.connect("mongodb://localhost:27017/isdbDb")
+mongoose.connect(`mongodb+srv://TomasAdam:${atlasKey}@cluster0.qo7k8.mongodb.net/isdbDb?retryWrites=true&w=majority`)
 app.use(express.json())
 app.use(passport.initialize());
 
@@ -29,9 +29,9 @@ app.use('/api', apiRoutes)
 app.use(express.urlencoded({ extended: true }));
 
 // this is to use bin/www 
-// module.exports = app;
+module.exports = app;
 
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000")
-})
+// app.listen(3000, () => {
+//   console.log("Listening on port 3000")
+// })

@@ -78,13 +78,15 @@ router.get('/albums/:id',
           as: "Artist"
         },
       },
-      {$unwind: "$Artist"},
-      {$lookup:{
-        from: "tracks",
-        localField: "AlbumId",
-        foreignField: "AlbumId",
-        as: "Tracks"
-      }}
+      { $unwind: "$Artist" },
+      {
+        $lookup: {
+          from: "tracks",
+          localField: "AlbumId",
+          foreignField: "AlbumId",
+          as: "Tracks"
+        }
+      }
     ])
     return res.json(query)
   })
@@ -92,13 +94,49 @@ router.get('/albums/:id',
 // POST TRACKS ----------------------------------------
 router.post('/tracks',
   // passport.authenticate('jwt', { session: false }),
-  async function (req, res){
-    
+  async function (req, res) {
     // check if data is passed from body
-    // check if genreid and album already exist 
-    // save new track
-    // res.send new track
+    let passedAlbumId = req.body.albumId;
+    let passedGenreId = req.body.genreId;
+    if (passedAlbumId && passedGenreId) {
+      // res.json({message: "Hello"})
 
+      // check if genreid and album already exist 
+      let genre = await Genre.findOne({ GenreId: passedGenreId });
+      if (genre) {
+        // check album
+        let album = await Album.findOne({ AlbumId: passedAlbumId });
+        if (album) {
+          // save data to Tracks
+          
+          let newTrack = new Track({
+            Name: req.body.trackName,
+            AlbumId: passedAlbumId,
+            GenreId: passedGenreId,
+            Composer: req.body.composer,
+            Milliseconds: req.body.duration,
+            Bytes: req.body.sizeInBytes,
+            UnitPrice: req.body.unitPrice
+          })
+
+          await newTrack.save();
+          res.send(newTrack);
+
+
+          // res.json({message: `${passedGenreId} and ${passedAlbumId}`})
+
+        } else {
+          res.json({ message: "Entered album id does not exist" })  
+        }
+
+      } else {
+        res.json({ message: "Entered genre id does not exist" })
+      }
+
+
+    } else {
+      res.json({ message: "Please enter AlbumId and GenreId" })
+    }
   })
 
 
@@ -110,7 +148,7 @@ router.get('/artists/:id',
     let query = await Artist.aggregate([
 
       { $match: { "ArtistId": searchId } },
-      {$project: {_id: 0}},
+      { $project: { _id: 0 } },
       {
         $lookup: {
           from: "albums",

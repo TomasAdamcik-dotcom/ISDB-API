@@ -6,7 +6,7 @@ const { Track, MediaType, Genre, Artist, Album } = require('../models/collection
 
 // TRACKS/:ID ------------------------------------
 router.get('/tracks/:id',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   async function (req, res) {
     // !!! I need to parse to integer, because mongo sees the id as a string
     let searchId = parseInt(req.params.id);
@@ -37,7 +37,7 @@ router.get('/tracks/:id',
 // GENRES ----------------------------------------
 router.get(
   '/genres',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   function (req, res) {
     Genre.aggregate([{ $project: { _id: 0, GenreId: 0 } }], function (err, genres) {
       if (err) {
@@ -48,23 +48,9 @@ router.get(
     })
   })
 
-// router.get('/genres',
-//   // passport.authenticate('jwt', { session: false }),
-//   async function (req, res) {
-//     let query = await Genre.aggregate([
-//       {
-//         $project: {
-//           _id: 0, GenreId: 0
-//         }
-//       }
-//     ])
-//     return res.json(query)
-//   })
-
-
 // ALBUMS/:ID ------------------------------------
 router.get('/albums/:id',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   async function (req, res) {
     let searchId = parseInt(req.params.id);
     let query = await Album.aggregate([
@@ -93,7 +79,7 @@ router.get('/albums/:id',
 
 // POST TRACKS ----------------------------------------
 router.post('/tracks',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   async function (req, res) {
     // check if data is passed from body
     let passedAlbumId = req.body.albumId;
@@ -142,7 +128,7 @@ router.post('/tracks',
 
 // ARTISTS/:ID -----------------------------------
 router.get('/artists/:id',
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   async function (req, res) {
     let searchId = parseInt(req.params.id);
     let query = await Artist.aggregate([
@@ -160,9 +146,5 @@ router.get('/artists/:id',
     ])
     return res.json(query)
   })
-
-
-
-
 
 module.exports = router;

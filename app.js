@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 // this is to use bin/www 
 module.exports = app;
 
-// to use when working with loacalhost
+// to use when working with loacalhost (my preffered way to use this with nodemon)
 // app.listen(3000, () => {
 //   console.log("Listening on port 3000")
 // })

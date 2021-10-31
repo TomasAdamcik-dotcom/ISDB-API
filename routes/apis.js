@@ -112,16 +112,16 @@ router.post('/tracks',
           // res.json({message: `${passedGenreId} and ${passedAlbumId}`})
 
         } else {
-          res.json({ message: "Entered album id does not exist" })  
+          res.status(401).json({ message: "Entered album id does not exist" })  
         }
 
       } else {
-        res.json({ message: "Entered genre id does not exist" })
+        res.status(401).json({ message: "Entered genre id does not exist" })
       }
 
 
     } else {
-      res.json({ message: "Please enter AlbumId and GenreId" })
+      res.status(401).json({ message: "Please enter AlbumId and GenreId" })
     }
   })
 

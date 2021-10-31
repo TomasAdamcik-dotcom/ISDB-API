@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose'); // to use mongodb
-const routes = require('./routes/apis');       
+// const routes = require('./routes/apis');       
+const routes = require('./routes/auth'); 
 require('dotenv').config()
 
 // import middleware code

@@ -3,7 +3,6 @@
 ---
 
 ## The Project brief
-TO BE UPDATED
 Customer is launching ISDB - "the interner song database" and needs an API that they can sell to their customers who can then build various front end appliactions with it.
 
 Full project brief available [here.](http://tomasadamcik.com/Bootcamp/3.Project-ISDB/BSE-M2-Project%20Brief.pdf)
